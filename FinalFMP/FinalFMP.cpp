@@ -23,5 +23,6 @@ int main() {
 	}
 
 	delete[] objects;
+	std::cout << "Deleted Objects!\n";
 	return 0;
 }
