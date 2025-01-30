@@ -1,0 +1,23 @@
+{
+  "player": {
+    "name": "Player",
+    "pos_x": 0,
+    "pos_y": 0,
+    "siz_x": 1,
+    "siz_y": 1
+  },
+  "troll": {
+    "name": "Troll",
+    "pos_x": 1,
+    "pos_y": 1,
+    "siz_x": 1,
+    "siz_y": 1
+  },
+  "goblin": {
+    "name": "Goblin",
+    "pos_x": 1,
+    "pos_y": 0,
+    "siz_x": 1,
+    "siz_y": 1
+  }
+}
