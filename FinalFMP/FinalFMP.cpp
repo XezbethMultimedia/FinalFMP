@@ -9,10 +9,7 @@ int main() {
 	std::ifstream f("objects.json");
 	json objects_json = json::parse(f);
 
-	std::cout << objects_json.dump(4) << "\n";
-
 	for (json::iterator it = objects_json.begin(); it != objects_json.end(); it++) {
-		std::cout << num << " : " << it.key() << " : " << it.value() << "\n";
 		num += 1;
 	}
 
