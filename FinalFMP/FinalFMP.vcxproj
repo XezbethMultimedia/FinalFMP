@@ -130,11 +130,10 @@
     <ClCompile Include="FinalFMP.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="data.hpp" />
     <ClInclude Include="json.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="objects.json" />
+    <None Include="cObject.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,28 +1,73 @@
+#include <iostream>
 #include <fstream>
 #include "json.hpp"
-#include "data.hpp"
-using json = nlohmann::json;
+
+namespace core {
+
+	using json = nlohmann::json;
+
+	class object {
+	public:
+		std::string name = "object";
+		int pos_x = 0;
+		int pos_y = 0;
+		int siz_x = 0;
+		int siz_y = 0;
+	};
+
+	void to_json(json& j, const object& o) {
+		j = json{
+			{"name", o.name},
+			{"pos_x", o.pos_x},
+			{"pos_y", o.pos_y},
+			{"siz_x", o.siz_x},
+			{"siz_y", o.siz_y}
+		};
+	}
+
+	void from_json(const json& j, object& o) {
+		j.at("name").get_to(o.name);
+		j.at("pos_x").get_to(o.pos_x);
+		j.at("pos_y").get_to(o.pos_y);
+		j.at("siz_x").get_to(o.siz_x);
+		j.at("siz_y").get_to(o.siz_y);
+	}
+
+	class engine {
+	private:
+		object* pObject = NULL;
+		int size = 0;
+	public:
+		void lcObject() {
+			size = 0;
+
+			std::ifstream file("cObject.json");
+			json jObject = json::parse(file);
+
+			for (json::iterator i = jObject.begin(); i != jObject.end(); i++) {
+				size++;
+			}
+
+			pObject = new object[size];
+			size = 0;
+
+			for (json::iterator i = jObject.begin(); i != jObject.end(); i++) {
+				*(pObject + size) = i.value().template get<object>();
+				std::cout << i.key() << " loaded: " << i.value() << "\n";
+				size += 1;
+			}
+		}
+
+		void clear() {
+			delete[] pObject;
+			std::cout << "Cleard up!\n";
+		}
+	};
+}
 
 int main() {
-	int num = 0;
-
-	std::ifstream f("objects.json");
-	json objects_json = json::parse(f);
-
-	for (json::iterator it = objects_json.begin(); it != objects_json.end(); it++) {
-		num += 1;
-	}
-
-	core::object* objects = new core::object[num];
-	num = 0;
-
-	for (json::iterator it = objects_json.begin(); it != objects_json.end(); it++) {
-		objects[num] = it.value().template get<core::object>();
-		std::cout << it.key() << " loaded: " << it.value() << "\n";
-		num += 1;
-	}
-
-	delete[] objects;
-	std::cout << "Deleted Objects!\n";
+	core::engine engine;
+	engine.lcObject();
+	engine.clear();
 	return 0;
 }
