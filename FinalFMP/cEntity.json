@@ -1,0 +1,41 @@
+{
+  "player": {
+    "name": "Player",
+    "pos_x": 0,
+    "pos_y": 0,
+    "siz_x": 1,
+    "siz_y": 1,
+    "hp": 5,
+    "xp": 0,
+    "lv": 0,
+    "atk": 1,
+    "def": 1,
+    "dmg": 1
+  },
+  "troll": {
+    "name": "Troll",
+    "pos_x": 1,
+    "pos_y": 1,
+    "siz_x": 1,
+    "siz_y": 1,
+    "hp": 10,
+    "xp": 0,
+    "lv": 0,
+    "atk": 2,
+    "def": 1,
+    "dmg": 1
+  },
+  "goblin": {
+    "name": "Goblin",
+    "pos_x": 1,
+    "pos_y": 0,
+    "siz_x": 1,
+    "siz_y": 1,
+    "hp": 2,
+    "xp": 0,
+    "lv": 0,
+    "atk": 1,
+    "def": 1,
+    "dmg": 1
+  }
+}

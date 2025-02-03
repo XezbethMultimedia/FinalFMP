@@ -25,6 +25,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cObject.json" />
+    <None Include="cEntity.json" />
+    <None Include="cItem.json" />
   </ItemGroup>
 </Project>

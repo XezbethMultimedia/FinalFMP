@@ -1,0 +1,11 @@
+{
+  "knife": {
+    "name": "Knife",
+    "pos_x": 1,
+    "pos_y": 0,
+    "siz_x": 1,
+    "siz_y": 1,
+    "stat": 0,
+    "value": 1
+  }
+}
