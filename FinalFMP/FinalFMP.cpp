@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include "json.hpp"
 
@@ -89,7 +89,7 @@ namespace core {
 
 		class item : public object::object {
 		public:
-			int* stat = NULL;
+			std::string stat;
 			int value = 0;
 		};
 
@@ -100,7 +100,7 @@ namespace core {
 				{"pos_y", i.pos_y},
 				{"siz_x", i.siz_x},
 				{"siz_y", i.siz_y},
-				{"stat", *i.stat},
+				{"stat", i.stat},
 				{"value", i.value}
 			};
 		}
@@ -111,7 +111,7 @@ namespace core {
 			j.at("pos_y").get_to(i.pos_y);
 			j.at("siz_x").get_to(i.siz_x);
 			j.at("siz_y").get_to(i.siz_y);
-			j.at("stat").get_to(*i.stat);
+			j.at("stat").get_to(i.stat);
 			j.at("value").get_to(i.value);
 		}
 	}
@@ -122,7 +122,29 @@ namespace core {
 			entity::entity* pEntity = NULL;
 			item::item* pItem = NULL;
 
+			std::string sTitle = R"(
+ _____                                                                                      _____ 
+( ___ )                                                                                    ( ___ )
+ |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | 
+ |   |  ______   __       ______   __    __   ______   __   __   ______  ______   __        |   | 
+ |   | /\  ___\ /\ \     /\  ___\ /\ "-./  \ /\  ___\ /\ "-.\ \ /\__  _\/\  __ \ /\ \       |   | 
+ |   | \ \  __\ \ \ \____\ \  __\ \ \ \-./\ \\ \  __\ \ \ \-.  \\/_/\ \/\ \  __ \\ \ \____  |   | 
+ |   |  \ \_____\\ \_____\\ \_____\\ \_\ \ \_\\ \_____\\ \_\\"\_\  \ \_\ \ \_\ \_\\ \_____\ |   | 
+ |   |   \/_____/ \/_____/ \/_____/ \/_/  \/_/ \/_____/ \/_/ \/_/   \/_/  \/_/\/_/ \/_____/ |   | 
+ |   |                             ______   ______  ______                                  |   | 
+ |   |                            /\  == \ /\  == \/\  ___\                                 |   | 
+ |   |                            \ \  __< \ \  _-/\ \ \__ \                                |   | 
+ |   |                             \ \_\ \_\\ \_\   \ \_____\                               |   | 
+ |   |                              \/_/ /_/ \/_/    \/_____/                               |   | 
+ |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___| 
+(_____)                                                                                    (_____)
+)";
+
 			int size = 0;
+
+			void title() {
+				std::cout << sTitle << "\n";
+			}
 
 			void lcObject() {
 				size = 0;
@@ -184,6 +206,59 @@ namespace core {
 				}
 			}
 
+			static int* findPointer(entity::entity& entity, std::string name) {
+				if (name == "hp") {
+					return &entity.hp;
+				}
+				else if (name == "xp") {
+					return &entity.xp;
+				}
+				else if (name == "lv") {
+					return &entity.lv;
+				}
+				else if (name == "atk") {
+					return &entity.atk;
+				}
+				else if (name == "def") {
+					return &entity.def;
+				}
+				else if (name == "dmg") {
+					return &entity.dmg;
+				}
+				else {
+					std::cout << "That stat does not exist!\n";
+					return NULL;
+				}
+			}
+
+			void showStats(entity::entity entity) {
+				std::cout << "Name: " << entity.name << "\n"
+					<< "Hp: " << entity.hp << "\n"
+					<< "Xp: " << entity.xp << "\n"
+					<< "Lv: " << entity.lv << "\n"
+					<< "Atk: " << entity.atk << "\n"
+					<< "def: " << entity.def << "\n"
+					<< "dmg: " << entity.dmg << "\n";
+			}
+
+			void useItem(item::item item, entity::entity& entity) {
+				int* pointer = findPointer(entity, item.stat);
+				*pointer += item.value;
+
+				std::cout << entity.name << " used: " << item.name << "\n";
+
+				showStats(entity);
+			}
+
+			void stopItem(item::item item, entity::entity& entity) {
+				int* pointer = findPointer(entity, item.stat);
+				*pointer -= item.value;
+
+				std::cout << entity.name << " put away: " << item.name << "\n";
+
+				showStats(entity);
+			}
+
 			void clear() {
 				delete[] pObject;
 				delete[] pEntity;
@@ -194,12 +269,14 @@ namespace core {
 }
 
 int main() {
-	core::engine::lcEntity();
+	using namespace core::engine;
 
-	int& stat = core::engine::pEntity->atk;
-	std::cout << stat << "\n";
+	lcEntity();
+	lcItem();
 
-	core::engine::lcItem();
-	core::engine::clear();
+	title();
+	useItem(pItem[0], pEntity[1]);
+	stopItem(pItem[0], pEntity[1]);
+	clear();
 	return 0;
 }

@@ -5,7 +5,7 @@
     "pos_y": 0,
     "siz_x": 1,
     "siz_y": 1,
-    "stat": 0,
+    "stat": "atk",
     "value": 1
   }
 }
