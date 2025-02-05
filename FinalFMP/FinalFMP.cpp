@@ -48,8 +48,20 @@ namespace core {
 			int def = 0;
 			int dmg = 0;
 
-			void death();
-			void lvlup();
+			int xp2lvl = 150;
+
+			bool alive = true;
+
+			void death() {
+				if (hp == 0) {
+					alive = false;
+				}
+			}
+			void lvlup() {
+				if (xp == xp2lvl) {
+					lv += 1;
+				}
+			}
 		};
 
 		void to_json(json& j, const entity& e) {
@@ -91,6 +103,7 @@ namespace core {
 		public:
 			std::string stat;
 			int value = 0;
+			int range = 0;
 		};
 
 		void to_json(json& j, const item& i) {
@@ -101,7 +114,8 @@ namespace core {
 				{"siz_x", i.siz_x},
 				{"siz_y", i.siz_y},
 				{"stat", i.stat},
-				{"value", i.value}
+				{"value", i.value},
+				{"range", i.range}
 			};
 		}
 
@@ -113,6 +127,7 @@ namespace core {
 			j.at("siz_y").get_to(i.siz_y);
 			j.at("stat").get_to(i.stat);
 			j.at("value").get_to(i.value);
+			j.at("range").get_to(i.range);
 		}
 	}
 
@@ -275,8 +290,9 @@ int main() {
 	lcItem();
 
 	title();
-	useItem(pItem[0], pEntity[1]);
-	stopItem(pItem[0], pEntity[1]);
+
+	useItem(pItem[3], pEntity[1]);
+	stopItem(pItem[3], pEntity[1]);
 	clear();
 	return 0;
 }

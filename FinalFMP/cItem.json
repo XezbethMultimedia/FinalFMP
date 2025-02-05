@@ -6,6 +6,57 @@
     "siz_x": 1,
     "siz_y": 1,
     "stat": "atk",
-    "value": 1
+    "value": 1,
+    "range": 1
+  },
+  "sword": {
+    "name": "Sword",
+    "pos_x": 1,
+    "pos_y": 1,
+    "siz_x": 2,
+    "siz_y": 1,
+    "stat": "atk",
+    "value": 2,
+    "range": 2
+  },
+  "spear": {
+    "name": "Spear",
+    "pos_x": 1,
+    "pos_y": 2,
+    "siz_x": 3,
+    "siz_y": 1,
+    "stat": "atk",
+    "value": 2,
+    "range": 3
+  },
+  "bow": {
+    "name": "Bow",
+    "pos_x": 1,
+    "pos_y": 3,
+    "siz_x": 3,
+    "siz_y": 1,
+    "stat": "atk",
+    "value": 2,
+    "range": 5
+  },
+  "book": {
+    "name": "Magic Book",
+    "pos_x": 1,
+    "pos_y": 4,
+    "siz_x": 1,
+    "siz_y": 1,
+    "stat": "atk",
+    "value": 2,
+    "range": 999
+  },
+  "ball": {
+    "name": "Minimum Confinement",
+    "pos_x": 1,
+    "pos_y": 5,
+    "siz_x": 1,
+    "siz_y": 1,
+    "stat": "atk",
+    "value": 0,
+    "range": 1
   }
 }
